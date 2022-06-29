@@ -10,6 +10,8 @@
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+
 </head>
 
 <body>
@@ -120,6 +122,8 @@
 					</table>
 					<!-- //guestRead -->
 					
+					<button id="btnTest" type="button"></button>
+					
 				</div>
 				<!-- //guestbook -->
 			
@@ -136,5 +140,15 @@
 	<!-- //wrap -->
 
 </body>
+<script type="text/javascript">
+$("button").on("click",function(){
+	console.log("버튼 클릭");
+	
+});
+
+
+
+
+</script>
 
 </html>
