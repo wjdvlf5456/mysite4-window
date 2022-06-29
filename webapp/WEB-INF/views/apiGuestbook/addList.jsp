@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
+<link href="${pageContext.request.contextPath}/assets/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/mysite.css" rel="stylesheet" type="text/css">
 <link href="${pageContext.request.contextPath}/assets/css/guestbook.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/bootstrap/js/bootstrap.js"></script>
 
 </head>
 
@@ -73,28 +75,7 @@
 						
 					</form>	
 					
-					<table class="guestRead">
-					<c:forEach items="${guestList }" var="guestVo">
-						<colgroup>
-							<col style="width: 10%;">
-							<col style="width: 40%;">
-							<col style="width: 40%;">
-							<col style="width: 10%;">
-						</colgroup>
-						<tr>
-							<td>${guestVo.no}</td>
-							<td>${guestVo.name} }</td>
-							<td>${guestVo.regDate} }</td>
-							<td><a href="">[삭제]</a></td>
-						</tr>
-						<tr>
-							<td colspan=4 class="text-left">${guestVo.content}</td>
-						</tr>
-					</c:forEach>
-					</table>
-					<!-- //guestRead -->
-					
-					<button id="btnTest" type="button">테스트용</button>
+					<!-- <div id="listArea"></div> -->
 					
 				</div>
 				<!-- //guestbook -->
