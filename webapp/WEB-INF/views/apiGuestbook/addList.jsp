@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,7 +22,7 @@
 	<div id="wrap">
 
 		<c:import url="/WEB-INF/views/includes/header.jsp"></c:import>
-	
+
 		<div id="container" class="clearfix">
 			<div id="aside">
 				<h2>방명록</h2>
@@ -34,7 +34,7 @@
 			<!-- //aside -->
 
 			<div id="content">
-				
+
 				<div id="content-head" class="clearfix">
 					<h3>일반방명록</h3>
 					<div id="location">
@@ -48,7 +48,7 @@
 				<!-- //content-head -->
 
 				<div id="guestbook">
-					<form action="" method="get">
+					<form action="" method="">
 						<table id="guestAdd">
 							<colgroup>
 								<col style="width: 70px;">
@@ -61,7 +61,7 @@
 									<th><label class="form-text" for="input-uname">이름</label></th>
 									<td><input id="input-uname" type="text" name="name"></td>
 									<th><label class="form-text" for="input-pass">패스워드</label></th>
-									<td><input id="input-pass"type="password" name="password"></td>
+									<td><input id="input-pass" type="password" name="password"></td>
 								</tr>
 								<tr>
 									<td colspan="4"><textarea name="content" cols="72" rows="5"></textarea></td>
@@ -70,18 +70,17 @@
 									<td colspan="4" class="text-center"><button type="submit">등록</button></td>
 								</tr>
 							</tbody>
-							
+
 						</table>
 						<!-- //guestWrite -->
-						<input type="hidden" name="action" value="add">
-						
-					</form>	
-					
+
+					</form>
+
 					<div id="listArea"></div>
-					
+
 				</div>
 				<!-- //guestbook -->
-			
+
 			</div>
 			<!-- //content  -->
 		</div>
@@ -94,18 +93,70 @@
 
 </body>
 <script type="text/javascript">
-$("button").on("click",function(){
-	console.log("버튼 클릭");
-	
-});
+	$(document).ready(function() {
+		console.log("data");
+		
+		fetchList()
 
-$(document).ready(function(){
-	console.log("data");
-	
-});
+	});
 
+	function fetchList() {
 
+		$.ajax({
+			url : "${pageContext.request.contextPath}/api/guestbook/list",
+			type : "post",
+			//contentType: "application/json",
+			//data : {name:”홍길동”},
 
+			dataType : "json",
+			success : function(guestList) {
+				
+				console.log(guestList)
+				//성공시 처리해야 될 코드 작성
+				for (var i = 0; i < guestList.length; i++) {
+					render(guestList[i],"down");
+				}
+
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+		// ajax 
+	};
+	// function
+	function render(guestbookVo,opt) {
+		var str = '';
+		str += '<table class="guestRead">';
+		str += '<colgroup>               ';
+		str += '<col style="width: 10%;">';
+		str += '<col style="width: 40%;">';
+		str += '<col style="width: 40%;">';
+		str += '<col style="width: 10%;">';
+		str += '</colgroup>';
+		str += '<tr>';
+		str += '<td>' + guestbookVo.no + '</td>';
+		str += '<td>' + guestbookVo.name + '</td>';
+		str += '<td>' + guestbookVo.regDate + '</td>';
+		str += '<td><a href="">[삭제]</a></td';
+		str += '</tr>';
+		str += '<tr>';
+		str += '<td colspan=4 class="text-left">' + guestbookVo.content + '</td>';
+		str += '</tr>';
+		str += '</table>';
+		
+		//리스트 순서
+        if (opt == "down") {
+            $("#listArea").append(str);
+
+        } else if (opt == "up") {
+            $("#listArea").prepend(str);
+
+        } else {
+            console.log("opt오류");
+        }
+
+	}
 </script>
 
 </html>

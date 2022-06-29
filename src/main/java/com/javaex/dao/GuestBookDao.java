@@ -15,7 +15,7 @@ public class GuestBookDao {
 	private SqlSession sqlSession;
 	
 	public List<GuestBookVo> guestList(){
-		List<GuestBookVo> guestList = sqlSession.selectList("selectList");
+		List<GuestBookVo> guestList = sqlSession.selectList("guestbook.selectList");
 		
 		return guestList;
 	};	

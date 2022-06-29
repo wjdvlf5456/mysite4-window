@@ -26,7 +26,7 @@ public class ApiGuestBookController {
 	};
 	
 	@ResponseBody
-	@RequestMapping(value = "list", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
 	public List<GuestBookVo> list() {
 		List<GuestBookVo> guestList = guestBookService.guestList();
 		System.out.println(guestList);
